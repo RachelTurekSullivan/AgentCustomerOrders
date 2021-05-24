@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Agent Page";
+}
+
+@model AgentCustomerOrders.Models.ViewModels.AgentViewModel;
+
+<div>
+    <h1 class="display-4">Agent List</h1>
+    <table class="table">
+        <thead>
+            <tr>
+            <td>Name</td>
+            <td>Working Area</td>
+            <td>Phone Number</td>
+            <td>Comission</td>
+        </tr>
+        </thead>
+        @foreach (var agent in Model.AgentList)
+        {
+            <tr>
+                <td>@agent._AgentName</td>
+                <td>@agent._WorkingaArea</td>
+                <td>@agent._PhoneNo</td>
+                <td>@agent._Commission</td>
+            </tr>
+        }
+    </table>
+
+
+</div>
