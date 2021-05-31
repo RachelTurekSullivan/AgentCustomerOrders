@@ -19,22 +19,27 @@
             </tr>
         </thead>
 
+        <button class="btn btn-block">
+            <a href="/home/newbook">Add a new book</a>
+        </button>
+
+
         <form>
-            <input type="button" name="AddAgent" label="Add New Agent"/>
+            <input type="button" name="AddAgent" label="Add New Agent" />
+
         </form>
 
         @foreach (var agent in Model.AgentList)
         {
-    <tr>
-        @*<td><a href="/home/agent/@agent._AgentCode"> @agent._AgentCode </a></td>*@
+            <tr>
 
-        <td> @Html.ActionLink(@agent._AgentCode, "AgentProfile", new { Id = agent._AgentCode })</td>
+                <td> @Html.ActionLink(@agent._AgentCode, "AgentProfile", new { Id = agent._AgentCode })</td>
 
-        <td>@agent._AgentName</td>
-        <td>@agent._WorkingaArea</td>
-        <td>@agent._PhoneNo</td>
-        <td>@agent._Commission</td>
-    </tr>
+                <td>@agent._AgentName</td>
+                <td>@agent._WorkingArea</td>
+                <td>@agent._PhoneNo</td>
+                <td>@agent._Commission</td>
+            </tr>
         }
     </table>
 

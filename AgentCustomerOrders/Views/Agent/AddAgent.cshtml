@@ -2,12 +2,16 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Title"] = "Add Agent";
+}
+@{
     <h1>Add Agent</h1>
 
-    <form method="post" action="home/newbook">
+    <form method="post" action="home/addAgent">
         <input name="AgentName" placeholder="Enter new agent name..." />
         <input name="WorkingArea" placeholder="Enter working area..." />
         <input name="Comission" placeholder="Enter commision amount..." />
         <input name="PhoneNo" placeholder="Enter phone number..." />
+        <button type="submit">Save</button>
     </form>
 }
