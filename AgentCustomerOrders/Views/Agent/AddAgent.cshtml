@@ -7,11 +7,21 @@
 @{
     <h1>Add Agent</h1>
 
-    <form method="post" action="home/addAgent">
-        <input name="AgentName" placeholder="Enter new agent name..." />
-        <input name="WorkingArea" placeholder="Enter working area..." />
-        <input name="Comission" placeholder="Enter commision amount..." />
-        <input name="PhoneNo" placeholder="Enter phone number..." />
-        <button type="submit">Save</button>
+    <form method="post" action="Agent/addAgent">
+        <div class="row">
+            <input name="AgentName" placeholder="Enter new agent name..." />
+        </div>
+        <div class="row">
+            <input name="WorkingArea" placeholder="Enter working area..." />
+        </div>
+        <div class="row">
+            <input name="Comission" placeholder="Enter commision amount..." />
+        </div>
+        <div class="row">
+            <input name="PhoneNo" placeholder="Enter phone number..." />
+        </div>
+        <div class="row">
+            <button type="submit">Save</button>
+        </div>    
     </form>
 }
