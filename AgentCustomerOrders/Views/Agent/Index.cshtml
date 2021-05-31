@@ -2,32 +2,42 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewData["Title"] = "Agent Page";
+    ViewData["Title"] = "Agent List";
 }
 
-@model AgentCustomerOrders.Models.ViewModels.AgentViewModel;
+@model AgentCustomerOrders.Models.AgentViewModel
 
 <div>
     <h1 class="display-4">Agent List</h1>
     <table class="table">
         <thead>
             <tr>
-            <td>Name</td>
-            <td>Working Area</td>
-            <td>Phone Number</td>
-            <td>Comission</td>
-        </tr>
+                <td>Name</td>
+                <td>Working Area</td>
+                <td>Phone Number</td>
+                <td>Comission</td>
+            </tr>
         </thead>
+
+        <form>
+            <input type="button" name="AddAgent" label="Add New Agent"/>
+        </form>
+
         @foreach (var agent in Model.AgentList)
         {
-            <tr>
-                <td>@agent._AgentName</td>
-                <td>@agent._WorkingaArea</td>
-                <td>@agent._PhoneNo</td>
-                <td>@agent._Commission</td>
-            </tr>
+    <tr>
+        @*<td><a href="/home/agent/@agent._AgentCode"> @agent._AgentCode </a></td>*@
+
+        <td> @Html.ActionLink(@agent._AgentCode, "AgentProfile", new { Id = agent._AgentCode })</td>
+
+        <td>@agent._AgentName</td>
+        <td>@agent._WorkingaArea</td>
+        <td>@agent._PhoneNo</td>
+        <td>@agent._Commission</td>
+    </tr>
         }
     </table>
 
 
 </div>
+

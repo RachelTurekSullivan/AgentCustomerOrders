@@ -1,0 +1,25 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Agent Details";
+}
+
+@model AgentCustomerOrders.Models.AgentDetails
+
+<div>
+    <h1 class="display-4">Agent Profile</h1>
+    <table class="table">
+        <tr>
+                <td>Agent Code: @Model.agent._AgentCode </td>
+                <td>Name: @Model.agent._AgentName</td>
+                <td>Working Area: @Model.agent._WorkingaArea</td>
+                <td>Comission: @Model.agent._PhoneNo</td>
+                <td>Phone Number: @Model.agent._Commission</td>  
+        </tr>
+        
+    </table>
+
+
+</div>
+
