@@ -48,6 +48,9 @@ namespace AgentCustomerOrders
 
             app.UseEndpoints(endpoints =>
             {
+                //endpoints.MapControllerRoute(
+                //    name: "AddAgent",
+                //    pattern:"Agent/addAgent");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
