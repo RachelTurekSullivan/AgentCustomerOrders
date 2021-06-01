@@ -38,6 +38,10 @@
                     <td>@Model.agent.PhoneNo</td>
                 </tr>
             </table>
+            @*<a href="/Agent/editAgent" class="btn btn-block btn-outline-info">
+                Edit Agent
+            </a>
+            @Html.ActionLink(@Model.agent.AgentCode, "EditAgent", new { Id = @Model.agent.AgentCode })*@
         </div>
      
     </div>

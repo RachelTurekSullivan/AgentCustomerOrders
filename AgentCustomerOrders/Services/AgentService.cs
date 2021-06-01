@@ -59,9 +59,9 @@ namespace AgentCustomerOrders.Services
 
             using (var conn = new SqlConnection(connectionString))
             {
-                conn.Open();               
+                conn.Open();
                 var cmd = new SqlCommand();
-        
+
                 cmd.Connection = conn;
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = "Select * from dbo.Agents Where AgentCode = '" + aCode + "'";
@@ -87,7 +87,7 @@ namespace AgentCustomerOrders.Services
         {
             string connectionString = _configuration.GetConnectionString("default");
 
-            
+
             using (var conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -102,16 +102,6 @@ namespace AgentCustomerOrders.Services
                 var code = getNextAgentCode(numAgents);
                 agent.AgentCode = code.ToString();
 
-
-//                CREATE TABLE  Agents
-//(
-//    AgentCode CHAR(4) NOT NULL PRIMARY KEY,
-//    AgentName VARCHAR(40),
-//    WorkingArea VARCHAR(35),
-//    Commission DECIMAL,
-//    PhoneNo CHAR(10)
-//);
-
                 var cmd = new SqlCommand();
                 cmd.Connection = conn;
                 cmd.CommandType = System.Data.CommandType.Text;
@@ -122,7 +112,7 @@ namespace AgentCustomerOrders.Services
                     ParameterName = "@AgentCode",
                     Value = agent.AgentCode,
                     SqlDbType = SqlDbType.NVarChar
-                }) ;
+                });
                 cmd.Parameters.Add(new SqlParameter
                 {
                     ParameterName = "@AgentName",
@@ -153,12 +143,69 @@ namespace AgentCustomerOrders.Services
         }
 
 
+        public void editExistingAgent(AgentModel agent){
+            string connectionString = _configuration.GetConnectionString("default");
+
+
+            using (var conn = new SqlConnection(connectionString))
+            {
+            conn.Open();
+
+             var getAgentCount = new SqlCommand();
+            getAgentCount.Connection = conn;
+            getAgentCount.CommandType = System.Data.CommandType.Text;
+            getAgentCount.CommandText = "SELECT count(AgentCode) FROM dbo.Agents";
+
+            var numAgents = (Int32)getAgentCount.ExecuteScalar();
+            var code = getNextAgentCode(numAgents);
+            agent.AgentCode = code.ToString();
+
+            var cmd = new SqlCommand();
+            cmd.Connection = conn;
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = "UPDATE dbo.Agents SET AgentName=@AgentName, WorkingArea = @WorkingArea, Commision= @Comission, PhoneNo = @PhoneNo) " +
+                               "WHERE AgentCode=@AgentCode";
+            cmd.Parameters.Add(new SqlParameter
+            {
+                ParameterName = "@AgentCode",
+                Value = agent.AgentCode,
+                SqlDbType = SqlDbType.NVarChar
+            });
+            cmd.Parameters.Add(new SqlParameter
+            {
+                ParameterName = "@AgentName",
+                Value = agent.AgentName,
+                SqlDbType = SqlDbType.NVarChar
+            });
+            cmd.Parameters.Add(new SqlParameter
+            {
+                ParameterName = "@WorkingArea",
+                Value = agent.WorkingArea,
+                SqlDbType = SqlDbType.NVarChar
+            });
+            cmd.Parameters.Add(new SqlParameter
+            {
+                ParameterName = "@Commission",
+                Value = agent.Commission,
+                SqlDbType = SqlDbType.Decimal
+            });
+            cmd.Parameters.Add(new SqlParameter
+            {
+                ParameterName = "@PhoneNo",
+                Value = agent.PhoneNo,
+                SqlDbType = SqlDbType.NVarChar
+            });
+
+            cmd.ExecuteNonQuery();
+        }
+    }
+
+
 
         public string getNextAgentCode(int count)
         {
             int numAgents = count+1;
             string newCode = "";
-
             if (numAgents < 9)
             {
                 newCode = "A00" + numAgents.ToString();
@@ -168,8 +215,6 @@ namespace AgentCustomerOrders.Services
                 newCode = "A0" + numAgents.ToString();
             }
             else { newCode = "A" + numAgents.ToString(); }
-
-
             return newCode;
         }
 

@@ -52,5 +52,18 @@ namespace AgentCustomerOrders.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public IActionResult EditAgent()
+        {
+            return (View());
+        }
+
+        [HttpPost]
+        public IActionResult editAgent(AgentModel agentModel)
+        {
+            _agentService.editExistingAgent(agentModel);
+            return RedirectToAction("Index");
+        }
+
     }
 }
