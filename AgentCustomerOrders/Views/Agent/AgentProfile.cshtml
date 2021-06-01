@@ -8,19 +8,39 @@
 @model AgentCustomerOrders.Models.AgentDetails
 
 <div>
-    <h1 class="display-4">Agent Profile</h1>
+    <h1 class="display-4">Agent @Model.agent.AgentCode Profile</h1>
 
-    <table class="table">
-        <tr>
-                <td>Agent Code: @Model.agent._AgentCode </td>
-                <td>Name: @Model.agent._AgentName</td>
-                <td>Working Area: @Model.agent._WorkingArea</td>
-                <td>Comission: @Model.agent._PhoneNo</td>
-                <td>Phone Number: @Model.agent._Commission</td>  
-        </tr>
-        
-    </table>
+    
 
+
+    <div class="card" style="width: 30rem;">
+        <img src="/agent.png" class="card-img-top" alt="..." max-width="150">
+        <div class="card-body">
+            <table class="table">
+                <tr>
+                    <th>Agent Code:</th>
+                    <td>@Model.agent.AgentCode </td>
+                </tr>
+                <tr>
+                    <th>Name:</th>
+                    <td>@Model.agent.AgentName</td>
+                </tr>
+                <tr>
+                    <th>Working Area:</th>
+                    <td> @Model.agent.WorkingArea</td>
+                </tr>
+                <tr>
+                    <th>Commission: </th>
+                    <td>@Model.agent.Commission</td>
+                </tr>
+                <tr>
+                    <th>Phone Number:</th>
+                    <td>@Model.agent.PhoneNo</td>
+                </tr>
+            </table>
+        </div>
+     
+    </div>
 
 </div>
 

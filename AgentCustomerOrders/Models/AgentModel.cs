@@ -8,33 +8,27 @@ namespace AgentCustomerOrders.Models
 {
     public class AgentModel
     {
-        [BindProperty]
-        public string _AgentCode { get; set; }
-        public string _AgentName { get; set; }
-        public string _WorkingArea { get; set; }
-        public double _Commission { get; set; }
-        public string _PhoneNo { get; set; }
+        //[BindProperty]
+        public string AgentCode { get; set; }
+        public string AgentName { get; set; }
+        public string WorkingArea { get; set; }
+        public double Commission { get; set; }
+        public string PhoneNo { get; set; }
 
         public AgentModel() { }
 
+        //spelled commission wrong and now have to have it like this for binding to work 
+        //or I can go change the database and then fix it everywhere...
         public AgentModel(string agentCode, string agentName, string workingArea, double commision, string phoneNo)
         {
-            _AgentCode = agentCode;
-            _AgentName = agentName;
-            _WorkingArea = workingArea;
-            _Commission = commision;
-            _PhoneNo = phoneNo;
+            AgentCode = agentCode;
+            AgentName = agentName;
+            WorkingArea = workingArea;
+            Commission = commision;
+            PhoneNo = phoneNo;
         }
 
-         //this is for creating a new agent.  The ID will be generated elsewhere.
-        public AgentModel (string agentName, string workingArea, double commision, string phoneNo)
-        {
-            _AgentCode = "";
-            _AgentName = agentName;
-            _WorkingArea = workingArea;
-            _Commission = commision;
-            _PhoneNo = phoneNo;
-        }
+         //this is for creating a new agent.  The ID will be generated elsewhere       
 
     }
 

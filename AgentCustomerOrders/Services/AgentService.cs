@@ -99,42 +99,52 @@ namespace AgentCustomerOrders.Services
                 getAgentCount.CommandText = "SELECT count(AgentCode) FROM dbo.Agents";
 
                 var numAgents = (Int32)getAgentCount.ExecuteScalar();
-                var newAgentCode = getNextAgentCode(numAgents);
+                var code = getNextAgentCode(numAgents);
+                agent.AgentCode = code.ToString();
 
+
+//                CREATE TABLE  Agents
+//(
+//    AgentCode CHAR(4) NOT NULL PRIMARY KEY,
+//    AgentName VARCHAR(40),
+//    WorkingArea VARCHAR(35),
+//    Commission DECIMAL,
+//    PhoneNo CHAR(10)
+//);
 
                 var cmd = new SqlCommand();
                 cmd.Connection = conn;
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = "INSERT INTO dbo.Agents (AgentCode, AgentName, WorkingArea, Commission, PhoneNo) " +
-                                    "VALUES (@newAgentCode, @agent._AgentName, @agent._WorkingArea, @agent._Commission, @agents._PhoneNo)";
-               cmd.Parameters.Add(new SqlParameter
+                                    "VALUES (@AgentCode, @AgentName, @WorkingArea, @Commission, @PhoneNo)";
+                cmd.Parameters.Add(new SqlParameter
                 {
                     ParameterName = "@AgentCode",
-                    Value = newAgentCode, 
-                   SqlDbType = SqlDbType.NVarChar
-                });
+                    Value = agent.AgentCode,
+                    SqlDbType = SqlDbType.NVarChar
+                }) ;
                 cmd.Parameters.Add(new SqlParameter
                 {
                     ParameterName = "@AgentName",
-                    Value = agent._AgentName,
+                    Value = agent.AgentName,
                     SqlDbType = SqlDbType.NVarChar
                 });
                 cmd.Parameters.Add(new SqlParameter
                 {
                     ParameterName = "@WorkingArea",
-                    Value = agent._WorkingArea,
+                    Value = agent.WorkingArea,
                     SqlDbType = SqlDbType.NVarChar
                 });
                 cmd.Parameters.Add(new SqlParameter
                 {
                     ParameterName = "@Commission",
-                    Value = agent._Commission,
-                    SqlDbType = SqlDbType.Int
+                    Value = agent.Commission,
+                    SqlDbType = SqlDbType.Decimal
                 });
                 cmd.Parameters.Add(new SqlParameter
                 {
                     ParameterName = "@PhoneNo",
-                    Value = agent._PhoneNo,
+                    Value = agent.PhoneNo,
                     SqlDbType = SqlDbType.NVarChar
                 });
 
@@ -146,18 +156,18 @@ namespace AgentCustomerOrders.Services
 
         public string getNextAgentCode(int count)
         {
-            int numAgents = count;
+            int numAgents = count+1;
             string newCode = "";
 
             if (numAgents < 9)
             {
-                newCode = "a00" + numAgents.ToString();
+                newCode = "A00" + numAgents.ToString();
             }
             else if (numAgents < 99)
             {
-                newCode = "a0" + numAgents.ToString();
+                newCode = "A0" + numAgents.ToString();
             }
-            else { newCode = "a" + numAgents.ToString(); }
+            else { newCode = "A" + numAgents.ToString(); }
 
 
             return newCode;
